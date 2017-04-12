@@ -38,11 +38,13 @@
 #include <fstream>
 #include <cstdint>
 #include <unistd.h>
+#include <stdint.h>
+#include <inttypes.h>
 
 #include <fcntl.h>
 #include <termios.h>
 
-
+using namespace std;
 
 
 namespace BlackLib

@@ -8,6 +8,17 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include BlackLib/v3_0/BlackUART/subdir.mk
+-include BlackLib/v3_0/BlackTime/subdir.mk
+-include BlackLib/v3_0/BlackThread/subdir.mk
+-include BlackLib/v3_0/BlackSPI/subdir.mk
+-include BlackLib/v3_0/BlackPWM/subdir.mk
+-include BlackLib/v3_0/BlackMutex/subdir.mk
+-include BlackLib/v3_0/BlackI2C/subdir.mk
+-include BlackLib/v3_0/BlackGPIO/subdir.mk
+-include BlackLib/v3_0/BlackDirectory/subdir.mk
+-include BlackLib/v3_0/BlackADC/subdir.mk
+-include BlackLib/v3_0/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -43,7 +54,7 @@ all: Black_IO
 Black_IO: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross G++ Linker'
-	g++  -o "Black_IO" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-linux-gnueabi-g++ -L/usr/arm-linux-gnueabi/lib -o "Black_IO" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
