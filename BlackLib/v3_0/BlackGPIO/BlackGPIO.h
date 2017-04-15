@@ -45,9 +45,13 @@ namespace BlackLib
     /*!
     * This enum is used for setting digital output value.
     */
-    enum digitalValue       {   low                     = 0,
-                                high                    = 1
-                            };
+    enum digitalValue
+	{   low                     = 0,
+
+
+    	high                    = 1
+
+	};
 
 
 

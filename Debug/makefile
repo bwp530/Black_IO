@@ -54,7 +54,7 @@ all: Black_IO
 Black_IO: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross G++ Linker'
-	arm-linux-gnueabi-g++ -L/usr/arm-linux-gnueabi/lib -o "Black_IO" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-linux-gnueabi-g++ -L/usr/arm-linux-gnueabi/lib -lpthread -o "Black_IO" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

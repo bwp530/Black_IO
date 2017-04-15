@@ -1,7 +1,16 @@
- /*
+//============================================================================
+// Name        : BBBTest.cpp
+// Author      : bwp
+// Version     :
+// Copyright   : Your copyright notice
+// Description : Hello World in C++, Ansi-style
+//============================================================================
 
- ####################################################################################
- #  BlackLib Library controls Beaglebone Black's inputs and outputs.                #
+#include <iostream>
+
+//using namespace std;
+/*
+#  BlackLib Library controls Beaglebone Black's inputs and outputs.                #
  #  Copyright (C) 2013-2015 by Yigit YUCE                                           #
  ####################################################################################
  #                                                                                  #
@@ -28,98 +37,34 @@
  */
 
 
+#include "BlackLib/v3_0/BlackLib.h"
 
-
-
-#ifndef EXAMPLE_GPIO_H_
-#define EXAMPLE_GPIO_H_
-
-
-
-
-#include "../BlackGPIO/BlackGPIO.h"
-
-#include <string>
-#include <iostream>
+#include "BlackLib/v3_0/examples/example_GPIO.h"
+//#include "BlackLib/v3_0/examples/example_ADC.h"
+//#include "BlackLib/v3_0/examples/example_PWM.h"
+//#include "BlackLib/v3_0/examples/example_SPI.h"
+//#include "BlackLib/v3_0/examples/example_UART.h"
+//#include "BlackLib/v3_0/examples/example_I2C.h"
+//#include "BlackLib/v3_0/examples/example_directory.h"
+//#include "BlackLib/v3_0/examples/example_threadAndMutex.h"
+//#include "BlackLib/v3_0/examples/example_time.h"
 
 
 
 
-void example_GPIO()
+int main()
 {
 
-    BlackLib::BlackGPIO   led1(BlackLib::GPIO_51,BlackLib::output, BlackLib::SecureMode);   // initialization first output, secure mode
-
-    BlackLib::BlackGPIO   led2(BlackLib::GPIO_22,BlackLib::output, BlackLib::FastMode);     // initialization second output, fast mode
-    BlackLib::BlackGPIO   button1(BlackLib::GPIO_60,BlackLib::input);                       // initialization first input, secure mode
-    BlackLib::BlackGPIO   button2(BlackLib::GPIO_48,BlackLib::input, BlackLib::FastMode);   // initialization second input, fast mode
-
-
-
-    led1.setValue(BlackLib::high);          // turn on the led1
-
-    led2.setValue(BlackLib::high);
+    example_GPIO();
+//    example_ADC();
+//    example_PWM();
+//    example_SPI();
+ //   example_UART();
+//    example_I2C();
+//    example_directory();
+//    example_threadAndMutex();
+//    example_time();
 
 
-
-
-    std::string button1value;
-    std::string button2value;
-    std::string led1value;
-    std::string led2value;
-
-
-    button1value    = button1.getValue();
-
-    button2value    = button2.getValue();
-
-
-
-    led1value       = led1.getValue();
-
-    led2value       = led2.getValue();
-
-    sleep(1);
-
-
-
-
-    led1.toggleValue();
-
-    led2.toggleValue();
-
-    sleep(1);
-
-
-
-
-
-    std::string led1value_operator;
-    int         led1NumericValue_operator;
-
-    led1 >> led1value_operator;
-
-    led1 << BlackLib::high;
-
-    led1 >> led1NumericValue_operator;
-
-
-
-
-
-    std::string led2value_operator;
-    int         led2NumericValue_operator;
-
-    led2 >> led2value_operator;
-
-    led2 << BlackLib::high;
-
-    led2 >> led2NumericValue_operator;
-
-    sleep(1);
-
+    return 0;
 }
-
-
-
-#endif /* EXAMPLE_GPIO_H_ */
