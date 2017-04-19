@@ -40,28 +40,29 @@
 #include "BlackLib/v3_0/BlackLib.h"
 
 #include "BlackLib/v3_0/examples/example_GPIO.h"
-//#include "BlackLib/v3_0/examples/example_ADC.h"
-//#include "BlackLib/v3_0/examples/example_PWM.h"
-//#include "BlackLib/v3_0/examples/example_SPI.h"
-//#include "BlackLib/v3_0/examples/example_UART.h"
-//#include "BlackLib/v3_0/examples/example_I2C.h"
-//#include "BlackLib/v3_0/examples/example_directory.h"
-//#include "BlackLib/v3_0/examples/example_threadAndMutex.h"
-//#include "BlackLib/v3_0/examples/example_time.h"
+#include "BlackLib/v3_0/examples/example_ADC.h"
+#include "BlackLib/v3_0/examples/example_PWM.h"
+#include "BlackLib/v3_0/examples/example_SPI.h"
+#include "BlackLib/v3_0/examples/example_UART.h"
+#include "BlackLib/v3_0/examples/example_I2C.h"
+#include "BlackLib/v3_0/examples/example_directory.h"
+#include "BlackLib/v3_0/examples/example_threadAndMutex.h"
+#include "BlackLib/v3_0/examples/example_time.h"
 
 
-
+#include <iostream>
 
 int main()
 {
 
-    example_GPIO();
-//    example_ADC();
-//    example_PWM();
+ //   example_GPIO();
+ //   example_ADC();
+//    example_directory();
+    example_PWM();
 //    example_SPI();
  //   example_UART();
-//    example_I2C();
-//    example_directory();
+//   example_I2C();
+
 //    example_threadAndMutex();
 //    example_time();
 

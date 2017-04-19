@@ -41,11 +41,11 @@
 #include <sstream>          // need for tostr() function
 #include <cstdio>           // need for popen() function in BlackCore::executeShellCmd()
 #include <dirent.h>         // need for dirent struct in BlackCore::searchDirectory()
+#include <iostream>
 
 
 
-
-
+#define BBBVERSION41
 
 
 
@@ -112,13 +112,6 @@ namespace BlackLib
             */
             std::string     executeCommand(std::string command);
 
-            /*! @brief Searches specified directory to find specified file/directory.
-            *
-            *  @param[in] searchIn searching directory
-            *  @param[in] searchThis search file/directory
-            *  @return Full name of searching file/directory.
-            */
-            std::string     searchDirectory(std::string searchIn, std::string searchThis);
 
             /*! @brief First declaration of this function.
             */
@@ -132,16 +125,26 @@ namespace BlackLib
              * This enum is used for defining ADC, PWM and SPI device driver names.
              */
             enum ocpSearch  {   ADC_helper  =   0,         /*!< enumeration for @a adc device driver name for using at BlackCore::searchDirectoryOcp() function parameter*/
-                                PWM_P8_13   =   1,         /*!< enumeration for @a P8_13 pwm device driver name */
-                                PWM_P8_19   =   2,         /*!< enumeration for @a P8_19 pwm device driver name */
-                                PWM_P9_14   =   3,         /*!< enumeration for @a P9_14 pwm device driver name */
-                                PWM_P9_16   =   4,         /*!< enumeration for @a P9_16 pwm device driver name */
-                                PWM_P9_21   =   5,         /*!< enumeration for @a P9_21 pwm device driver name */
-                                PWM_P9_22   =   6,         /*!< enumeration for @a P9_22 pwm device driver name */
-                                PWM_P9_42   =   7,         /*!< enumeration for @a P9_42 pwm device driver name */
-                                SPI0        =   8,         /*!< enumeration for @a SPI0 spi device driver name */
-                                SPI1        =   9          /*!< enumeration for @a SPI1 spi device driver name */
+            					ADC_In_Voltage =   1,
+                                PWM_P8_13   =   2,         /*!< enumeration for @a P8_13 pwm device driver name */
+                                PWM_P8_19   =   3,         /*!< enumeration for @a P8_19 pwm device driver name */
+                                PWM_P9_14   =   4,         /*!< enumeration for @a P9_14 pwm device driver name */
+                                PWM_P9_16   =   5,         /*!< enumeration for @a P9_16 pwm device driver name */
+                                PWM_P9_21   =   6,         /*!< enumeration for @a P9_21 pwm device driver name */
+                                PWM_P9_22   =   7,         /*!< enumeration for @a P9_22 pwm device driver name */
+                                PWM_P9_42   =   8,         /*!< enumeration for @a P9_42 pwm device driver name */
+                                SPI0        =   9,         /*!< enumeration for @a SPI0 spi device driver name */
+                                SPI1        =   10          /*!< enumeration for @a SPI1 spi device driver name */
                             };
+
+            /*! @brief Searches specified directory to find specified file/directory.
+             *
+             *  @param[in] searchIn searching directory
+             *  @param[in] searchThis search file/directory
+             *  @return Full name of searching file/directory.
+             */
+             std::string     searchDirectory(std::string searchIn, std::string searchThis);
+
 
             /*! @brief Searches ocp directory to find specified file/directory.
             *
@@ -150,6 +153,8 @@ namespace BlackLib
             *  @return Full name of searching file/directory.
             */
             std::string     searchDirectoryOcp(BlackCore::ocpSearch searchThis);
+
+
 
             /*! @brief Exports errorCore struct to derived class.
             *
@@ -168,6 +173,12 @@ namespace BlackLib
             *  @return BlackCore::ocpName variable.
             */
             std::string     getOcpName();
+
+            /*! @brief Exports ocp name to derived class.
+            *
+            *  @return BlackCore::ocpName variable.
+            */
+          //  std::string     getName();
 
             /*! @brief Exports slots file path to derived class.
             *

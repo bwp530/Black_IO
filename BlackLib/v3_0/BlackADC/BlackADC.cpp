@@ -31,7 +31,7 @@
 
 
 
-
+ using namespace std;
 
 namespace BlackLib
 {
@@ -42,7 +42,11 @@ namespace BlackLib
         this->adcCoreErrors = new errorCoreADC( this->getErrorsFromCore() );
 
         this->loadDeviceTree();
+#ifdef BBBVERSION41
+        this->findInVoltageName();
+#else
         this->findHelperName();
+#endif
     }
 
     BlackCoreADC::~BlackCoreADC()
@@ -64,8 +68,9 @@ namespace BlackLib
         }
         else
         {
-            slotsFile << "cape-bone-iio";
+            slotsFile << "BB-ADC";
             slotsFile.close();
+            cout<<"loadslots:"<<endl;
             this->adcCoreErrors->dtError = false;
             return true;
         }
@@ -73,7 +78,8 @@ namespace BlackLib
 
     bool        BlackCoreADC::findHelperName()
     {
-        std::string limitedSearchResult = this->searchDirectoryOcp(BlackCore::ADC_helper);
+
+    	std::string limitedSearchResult = this->searchDirectoryOcp(BlackCore::ADC_helper);
 
         if(limitedSearchResult == SEARCH_DIR_NOT_FOUND)
         {
@@ -87,11 +93,40 @@ namespace BlackLib
             this->adcCoreErrors->helperError = false;
             return true;
         }
-    }
 
+
+
+    }
+    bool        BlackCoreADC::findInVoltageName()
+    {
+
+    	std::string limitedSearchResult = this->searchDirectory("/sys/bus/iio/devices/iio:device0", "in_voltage");
+
+        if(limitedSearchResult == SEARCH_DIR_NOT_FOUND)
+        {
+            this->in_voltageName = "helper." + DEFAULT_HELPER_NUMBER;
+            this->adcCoreErrors->helperError = true;
+            return false;
+        }
+        else
+        {
+            this->in_voltageName = limitedSearchResult;
+            this->adcCoreErrors->helperError = false;
+            return true;
+        }
+
+
+
+    }
     std::string BlackCoreADC::getHelperPath()
     {
-        std::string temp = "/sys/devices/" + this->getOcpName() + "/" + this->helperName;
+        std::string temp = "/sys/devices/platform/" + this->getOcpName() + "/" + this->helperName;
+        return temp;
+    }
+
+    std::string BlackCoreADC::getInVoltagePath()
+    {
+        std::string temp = "/sys/bus/iio/devices/iio:device0/";
         return temp;
     }
 
@@ -116,7 +151,14 @@ namespace BlackLib
     {
         this->adcErrors                 = new errorADC( this->getErrorsFromCoreADC() );
         this->ainName                   = adc;
+#ifdef BBBVERSION41
+
+        this->ainPath                   = this->getInVoltagePath()+ "in_voltage" + tostr(this->ainName) + "_raw";
+        cout<<this->ainPath<<endl;
+#else
         this->ainPath                   = this->getHelperPath() + "/AIN" + tostr(this->ainName);
+
+#endif
     }
 
 

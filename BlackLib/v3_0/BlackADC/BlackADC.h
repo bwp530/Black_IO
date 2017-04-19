@@ -81,7 +81,7 @@ namespace BlackLib
         private:
             errorCoreADC    *adcCoreErrors;         /*!< @brief is used to hold the errors of BlackCoreADC class */
             std::string     helperName;             /*!< @brief is used to hold the helper(analog input device driver) name */
-
+            std::string     in_voltageName;
             /*! @brief Loads ADC overlay to device tree.
             *
             *  This function loads @b "cape-bone-iio" overlay to device tree.
@@ -99,7 +99,14 @@ namespace BlackLib
             */
             bool            findHelperName();
 
-
+            /*! @brief Finds full name of helper.
+            *
+            *  This function searches @b "ocp.X" directory, to find directory which starts with
+            *  @b "helper." by using searchDirectoryOcp() protected function at BlackCore class.
+            *  @return True if successful, else false.
+            *  @sa BlackCore::searchDirectoryOcp()
+            */
+            bool            findInVoltageName();
 
         protected:
 
@@ -108,6 +115,12 @@ namespace BlackLib
             *  @return Full path of helper.
             */
             std::string     getHelperPath();
+
+            /*! @brief Exports helper path to derived class.
+            *
+            *  @return Full path of helper.
+            */
+            std::string     getInVoltagePath();
 
             /*! @brief Exports errorCoreADC struct pointer to derived class.
             *

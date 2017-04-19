@@ -32,7 +32,7 @@
 
 
 
-
+ using namespace std;
 
 
 namespace BlackLib
@@ -45,7 +45,7 @@ namespace BlackLib
 
         this->findCapeMgrName();
         this->findOcpName();
-        this->slotsFilePath = "/sys/devices/" + this->capeMgrName + "/slots";
+        this->slotsFilePath = "/sys/devices/platform/" + this->capeMgrName + "/slots";
     }
 
     BlackCore::~BlackCore()
@@ -96,6 +96,7 @@ namespace BlackLib
                 if(strstr(entry->d_name,searchThis.c_str()) != NULL )
                 {
                     closedir(path);
+                   cout<<"searchfile:"<<str<<endl;
                     return str;
                 }
             }
@@ -107,7 +108,7 @@ namespace BlackLib
 
     bool        BlackCore::findCapeMgrName()
     {
-        std::string searchResult = this->searchDirectory("/sys/devices/","bone_capemgr.");
+        std::string searchResult = this->searchDirectory("/sys/devices/platform/","bone_capemgr");
 
         if(searchResult == SEARCH_DIR_NOT_FOUND)
         {
@@ -118,6 +119,7 @@ namespace BlackLib
         else
         {
             this->capeMgrName = searchResult;
+            cout<<"capemgr:"<<searchResult<<endl;
             this->coreErrors->capeMgrError = false;
             return true;
         }
@@ -125,7 +127,7 @@ namespace BlackLib
 
     bool        BlackCore::findOcpName()
     {
-        std::string searchResult = this->searchDirectory("/sys/devices/","ocp.");
+        std::string searchResult = this->searchDirectory("/sys/devices/platform/","ocp");
 
         if(searchResult == SEARCH_DIR_NOT_FOUND)
         {
@@ -136,6 +138,7 @@ namespace BlackLib
         else
         {
             this->ocpName = searchResult;
+            cout<<"ocp:"<<searchResult<<endl;
             this->coreErrors->ocpError = false;
             return true;
         }
@@ -147,7 +150,7 @@ namespace BlackLib
     std::string BlackCore::searchDirectoryOcp(BlackCore::ocpSearch searchThis)
     {
         std::string searchResult;
-        std::string searchPath = "/sys/devices/" + this->getOcpName() + "/";
+        std::string searchPath = "/sys/devices/platform/" + this->getOcpName() + "/";
 
         if( searchThis == this->SPI0 )
         {
